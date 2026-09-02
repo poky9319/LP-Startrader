@@ -2,7 +2,7 @@
 <html lang="ms">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>FXUlti Trader Cup · STARTRADER</title>
 <meta name="description" content="Monthly STARTRADER trader competition hosted by FXUlti. Ranked by ROI. Minimum deposit $50. Results updated daily at 08:00.">
 <link rel="icon" href="/favicon.ico" sizes="any">
@@ -558,20 +558,134 @@ tbody tr.top3 { background: rgba(205,127,50,.05); }
   .menu-btn { display: inline-flex; align-items: center; justify-content: center; }
   .stats, .steps, .faq-grid { grid-template-columns: 1fr 1fr; }
   .prizes { grid-template-columns: 1fr; }
-  .prize.gold { transform: none; }
+  .prize.gold { transform: none; order: -1; }
   .topbar-left { display: none; }
+  .stats { margin-top: 16px; }
 }
 @media (max-width: 720px) {
-  .stats, .steps, .faq-grid { grid-template-columns: 1fr; }
-  .hero { min-height: auto; }
-  .hero .wrap { padding: 48px 0 64px; }
-  .hero-ctas .btn-lg { width: 100%; }
-  .nav .wrap { min-height: 60px; }
+  .wrap { width: min(1180px, calc(100% - 48px)); }
+  .nav { padding-top: env(safe-area-inset-top); }
+  .nav .wrap { min-height: 56px; gap: 8px; }
+  .brand { gap: 8px; }
+  .brand-mark { width: 22px; height: 22px; }
+  .brand-text strong { font-size: 12px; letter-spacing: .1em; }
+  .brand-text small { font-size: 8px; letter-spacing: .12em; }
+  .lang-select { min-width: 0; height: 34px; font-size: 11px; padding: 0 8px; border-color: rgba(255,255,255,.22); }
+  .menu-btn { width: 36px; height: 36px; }
   .topbar { display: none; }
+  .nav-right { gap: 6px; }
   .nav-right > .btn { display: none; }
   .mobile-cta { display: flex; }
-  body { padding-bottom: 74px; }
-  section { padding: 52px 0; }
+  body { padding-bottom: calc(92px + env(safe-area-inset-bottom)); }
+  .hero {
+    min-height: auto;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero::before {
+    position: relative;
+    inset: auto;
+    height: 148px;
+    opacity: 1;
+    background:
+      linear-gradient(180deg, rgba(10,11,13,.12) 0%, rgba(10,11,13,.78) 70%, #0a0b0d 100%),
+      url("banner-hero.png") center 32% / cover no-repeat;
+  }
+  .speed-lines { display: none; }
+  .hero .wrap { padding: 22px 0 20px; }
+  .kicker { font-size: 11px; letter-spacing: .12em; margin-bottom: 12px; }
+  .hero h1 {
+    font-size: 24px;
+    line-height: 1.22;
+    letter-spacing: -.03em;
+    max-width: 100%;
+    overflow-wrap: break-word;
+  }
+  .hero-sub { margin-top: 14px; font-size: 14px; line-height: 1.7; }
+  .hero .hero-ctas { display: none; }
+  .cta-band .hero-ctas { display: flex; flex-direction: column; gap: 10px; margin-top: 18px; }
+  .hero-ctas .btn-lg { width: 100%; height: 48px; font-size: 14px; }
+  .hero-pills { display: none; }
+  .stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .stat-card { padding: 14px 12px; }
+  .stat-card small {
+    font-size: 10px;
+    margin-bottom: 6px;
+    letter-spacing: .04em;
+    color: #c5c9ce;
+    white-space: normal;
+    line-height: 1.3;
+  }
+  .stat-card strong { font-size: 22px; }
+  .countdown { font-size: 16px !important; letter-spacing: .04em; }
+  section { padding: 36px 0; scroll-margin-top: 72px; }
+  .section-head { margin-bottom: 18px; }
+  .section-head h2 { font-size: 24px; }
+  .prizes { gap: 12px; }
+  .prize { padding: 16px 14px 18px; }
+  .prize-photo { aspect-ratio: 16 / 10; max-height: 180px; margin: 10px 0 12px; }
+  .prize .amount { font-size: 18px; }
+  .steps { gap: 10px; }
+  .step {
+    min-height: 0;
+    padding: 16px;
+    display: grid;
+    grid-template-columns: 32px 1fr;
+    column-gap: 12px;
+  }
+  .step-no { margin-bottom: 0; grid-row: 1 / span 2; align-self: start; }
+  .step h3 { font-size: 15px; }
+  .step p { font-size: 13px; }
+  .faq-grid { grid-template-columns: 1fr; gap: 10px; }
+  .faq { padding: 16px; }
+  .board-toolbar { flex-direction: column; align-items: stretch; padding: 14px; gap: 10px; }
+  .search { min-width: 0; width: 100%; }
+  .demo-flag { width: 100%; }
+  table { min-width: 0; }
+  .table-wrap { overflow: visible; }
+  thead { display: none; }
+  tbody tr {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    gap: 2px 10px;
+    align-items: center;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+  }
+  tbody td {
+    border: 0;
+    padding: 0;
+    font-size: 13px;
+  }
+  tbody td:nth-child(1) { grid-row: 1 / span 2; }
+  tbody td:nth-child(2) { grid-column: 2; color: var(--muted); font-size: 12px; }
+  tbody td:nth-child(3) { grid-column: 2; grid-row: 1; }
+  tbody td:nth-child(4) { display: none; }
+  tbody td:nth-child(5) { grid-column: 3; grid-row: 1 / span 2; font-size: 16px; }
+  tbody td[colspan] { grid-column: 1 / -1; text-align: center; padding: 20px 8px; }
+  .cta-band h2 { font-size: 24px; line-height: 1.25; }
+  .cta-band .wrap { padding: 8px 0; }
+  .disclaimer { padding: 20px 0 24px; }
+  .footer { flex-direction: column; gap: 8px; }
+  .mobile-cta {
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    gap: 8px;
+  }
+  .mobile-cta .btn {
+    white-space: nowrap;
+    line-height: 1.2;
+    font-size: 12px;
+    letter-spacing: 0;
+    height: 44px;
+    min-height: 44px;
+    min-width: 0;
+    padding: 0 8px;
+    text-align: center;
+  }
 }
 </style>
 </head>
@@ -818,8 +932,8 @@ tbody tr.top3 { background: rgba(205,127,50,.05); }
 </div>
 
 <div class="mobile-cta">
-  <a class="btn btn-outline btn-md" id="m-register" href="https://strex.live/la-my/my/hNuEu6Db" target="_blank" rel="noopener noreferrer" style="flex:1" data-i18n="btn_open">BUKA AKAUN LANGSUNG</a>
-  <a class="btn btn-cyan btn-md" id="m-join" href="https://t.me/phou4200" target="_blank" rel="noopener noreferrer" style="flex:1" data-i18n="btn_join">HUBUNGI KAMI</a>
+  <a class="btn btn-outline btn-md" id="m-register" href="https://strex.live/la-my/my/hNuEu6Db" target="_blank" rel="noopener noreferrer" style="flex:1" data-i18n="btn_open_m">BUKA AKAUN</a>
+  <a class="btn btn-cyan btn-md" id="m-join" href="https://t.me/phou4200" target="_blank" rel="noopener noreferrer" style="flex:1" data-i18n="btn_join_m">HUBUNGI</a>
 </div>
 
 <script>
@@ -840,8 +954,10 @@ const I18N = {
   en: {
     top_note: "FXUlti IB competition · results updated daily 08:00",
     btn_open: "OPEN LIVE ACCOUNT",
+    btn_open_m: "OPEN ACCOUNT",
     btn_open_full: "Open STARTRADER account",
     btn_join: "CONTACT US",
+    btn_join_m: "CONTACT",
     btn_home: "View leaderboard",
     nav_overview: "Overview",
     nav_join: "How to Join",
@@ -906,8 +1022,10 @@ const I18N = {
   ms: {
     top_note: "Pertandingan IB FXUlti · keputusan dikemas kini setiap hari 08:00",
     btn_open: "BUKA AKAUN LANGSUNG",
+    btn_open_m: "BUKA AKAUN",
     btn_open_full: "Buka akaun STARTRADER",
     btn_join: "HUBUNGI KAMI",
+    btn_join_m: "HUBUNGI",
     btn_home: "Lihat papan pendahulu",
     nav_overview: "Gambaran",
     nav_join: "Cara Sertai",
@@ -919,10 +1037,10 @@ const I18N = {
     pill_roi: "Kedudukan mengikut ROI",
     pill_update: "Kemas kini harian 08:00",
     pill_month: "Musim baharu setiap bulan",
-    stat_min: "Deposit minimum",
-    stat_metric: "Metrik kedudukan",
-    stat_update: "Kemas kini harian",
-    stat_next: "Kemas kini seterusnya",
+    stat_min: "Deposit min.",
+    stat_metric: "Metrik",
+    stat_update: "Harian",
+    stat_next: "Seterusnya",
     prize_kicker: "PODIUM HADIAH",
     prize_title: "Podium bulan ini",
     prize_1: "Juara",
@@ -972,8 +1090,10 @@ const I18N = {
   "zh-CN": {
     top_note: "FXUlti IB 交易员比赛 · 成绩每天 08:00 更新",
     btn_open: "立即开户",
+    btn_open_m: "立即开户",
     btn_open_full: "开通 STARTRADER 账户",
     btn_join: "联系客服",
+    btn_join_m: "联系客服",
     btn_home: "查看成绩榜",
     nav_overview: "赛事概览",
     nav_join: "如何参赛",
