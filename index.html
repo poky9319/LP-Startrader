@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FXUlti Trader Cup · STARTRADER</title>
+<meta name="description" content="Monthly STARTRADER trader competition hosted by FXUlti. Ranked by ROI. Minimum deposit $50. Results updated daily at 08:00.">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0a0b0d">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root {
+  --cyan: #00E5D1;
+  --cyan-dim: rgba(0,229,209,.14);
+  --bg: #0a0b0d;
+  --bg-2: #111316;
+  --bar: #16181c;
+  --card: #17191d;
+  --line: rgba(255,255,255,.08);
+  --text: #fff;
+  --muted: #9aa0a6;
+  --gold: #f0c14b;
+  --silver: #c9d1d9;
+  --bronze: #cd7f32;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: Inter, "Noto Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+.wrap { width: min(1180px, calc(100% - 32px)); margin: 0 auto; }
+
+/* Top utility bar */
+.topbar {
+  background: #1a1c20;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+  color: #cfd3d8;
+}
+.topbar .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+  gap: 12px;
+}
+.topbar-left { display: flex; align-items: center; gap: 16px; color: #b8bdc4; }
+.topbar-left span { letter-spacing: .02em; }
+.topbar-actions { display: flex; gap: 8px; flex-shrink: 0; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: .02em;
+  border-radius: 4px;
+  transition: .2s ease;
+  white-space: nowrap;
+}
+.btn-cyan {
+  background: var(--cyan);
+  color: #06110f;
+  box-shadow: 0 0 0 1px rgba(0,229,209,.2), 0 8px 24px rgba(0,229,209,.18);
+}
+.btn-cyan:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.btn-ghost {
+  background: #2a2d33;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.08);
+}
+.btn-ghost:hover { background: #34383f; }
+.btn-sm { height: 28px; padding: 0 12px; font-size: 11px; }
+.btn-md { height: 44px; padding: 0 22px; font-size: 14px; }
+.btn-lg { height: 52px; padding: 0 28px; font-size: 15px; }
+.btn-outline {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.22);
+}
+.btn-outline:hover { border-color: var(--cyan); color: var(--cyan); }
+
+/* Main nav */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(10,11,13,.92);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+}
+.nav .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 72px;
+  gap: 18px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  min-width: 0;
+}
+.brand-mark { width: 28px; height: 28px; flex-shrink: 0; }
+.brand-text { display: flex; flex-direction: column; line-height: 1.1; }
+.brand-text strong {
+  font-size: 15px;
+  letter-spacing: .14em;
+  font-weight: 800;
+}
+.brand-text small {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  margin-top: 3px;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.nav-links a { text-decoration: none; color: #e8eaed; }
+.nav-links a:hover { color: var(--cyan); }
+.nav-right { display: flex; align-items: center; gap: 10px; }
+.lang-select {
+  background: transparent;
+  color: #fff;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  height: 36px;
+  padding: 0 8px;
+  font-size: 12px;
+  font-family: inherit;
+}
+.menu-btn {
+  display: none;
+  width: 40px; height: 40px;
+  background: transparent;
+  border: 1px solid var(--line);
+  color: #fff;
+  border-radius: 4px;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  min-height: 78vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background:
+    radial-gradient(900px 420px at 80% 30%, rgba(255,80,40,.16), transparent 55%),
+    radial-gradient(700px 380px at 10% 80%, rgba(0,229,209,.08), transparent 50%),
+    #0a0b0d;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(10,11,13,.94) 0%, rgba(10,11,13,.62) 40%, rgba(10,11,13,.18) 72%, rgba(10,11,13,.08) 100%),
+    url("banner-hero.png") right center / cover no-repeat;
+  opacity: .9;
+  pointer-events: none;
+}
+.speed-lines {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(105deg, transparent 0 18px, rgba(255,90,40,.035) 18px 19px);
+  mask-image: linear-gradient(90deg, transparent, #000 40%, #000);
+  pointer-events: none;
+}
+.hero .wrap { position: relative; z-index: 1; padding: 72px 0 80px; }
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--cyan);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+.kicker i { font-size: 10px; }
+.hero h1 {
+  font-size: clamp(42px, 7vw, 76px);
+  line-height: .95;
+  font-weight: 800;
+  letter-spacing: -.04em;
+  max-width: 720px;
+}
+.hero h1 span { color: var(--cyan); }
+.hero-sub {
+  margin-top: 22px;
+  max-width: 540px;
+  color: #d7dbe0;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.hero-pills { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 34px;
+  padding: 0 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  font-size: 12px;
+  color: #e8eaed;
+}
+.pill i { color: var(--cyan); font-size: 11px; }
+
+/* Sections */
+section { padding: 72px 0; scroll-margin-top: 84px; }
+.section-head { margin-bottom: 32px; }
+.section-head h2 {
+  font-size: clamp(28px, 4vw, 40px);
+  letter-spacing: -.03em;
+  margin-top: 8px;
+}
+.muted { color: var(--muted); }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: -48px;
+  position: relative;
+  z-index: 2;
+}
+.stat-card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 22px 20px;
+}
+.stat-card small {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.stat-card strong {
+  font-size: 28px;
+  letter-spacing: -.03em;
+  color: var(--cyan);
+}
+.countdown {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .08em;
+  font-size: 22px !important;
+  font-weight: 800;
+}
+
+.prizes { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 16px; align-items: stretch; }
+.prize {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 22px 18px 24px;
+  text-align: center;
+}
+.prize.gold {
+  background: linear-gradient(180deg, rgba(240,193,75,.12), rgba(23,25,29,.9));
+  border-color: rgba(240,193,75,.35);
+  transform: translateY(-10px);
+}
+.prize .place { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+.prize-photo {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 8px;
+  margin: 14px 0 14px;
+  background: #050505;
+  border: 1px solid rgba(255,255,255,.06);
+}
+.prize.gold .prize-photo {
+  box-shadow: 0 12px 32px rgba(240,193,75,.18);
+  border-color: rgba(240,193,75,.28);
+}
+.prize.silver .prize-photo { box-shadow: 0 10px 24px rgba(201,209,217,.08); }
+.prize.bronze .prize-photo { box-shadow: 0 10px 24px rgba(205,127,50,.12); }
+.prize .amount { font-size: 22px; font-weight: 800; margin-top: 8px; letter-spacing: -.02em; }
+.prize.gold .amount { color: var(--gold); }
+.prize.silver .amount { color: var(--silver); }
+.prize.bronze .amount { color: var(--bronze); }
+
+.steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.step {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 24px 20px;
+  min-height: 210px;
+}
+.step-no {
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  background: var(--cyan);
+  color: #06110f;
+  font-weight: 800;
+  border-radius: 4px;
+  margin-bottom: 16px;
+}
+.step h3 { font-size: 16px; margin-bottom: 8px; }
+.step p { color: var(--muted); font-size: 14px; line-height: 1.6; }
+
+.board-panel {
+  background: var(--bg-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.board-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--line);
+}
+.updated {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+.updated b { color: var(--cyan); font-weight: 600; }
+.demo-flag {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background: rgba(240,193,75,.12);
+  color: var(--gold);
+  border: 1px solid rgba(240,193,75,.3);
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.demo-flag.show { display: inline-flex; }
+.search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #0f1114;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  height: 40px;
+  padding: 0 12px;
+  min-width: min(280px, 100%);
+}
+.search input {
+  background: transparent;
+  border: 0;
+  outline: 0;
+  color: #fff;
+  width: 100%;
+  font: inherit;
+  font-size: 13px;
+}
+.search i { color: var(--muted); }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 680px; }
+th, td {
+  text-align: left;
+  padding: 16px 20px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--line);
+}
+th {
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 700;
+  background: #14161a;
+}
+tbody tr:hover { background: rgba(255,255,255,.025); }
+tbody tr.top1 { background: rgba(240,193,75,.06); }
+tbody tr.top2 { background: rgba(201,209,217,.04); }
+tbody tr.top3 { background: rgba(205,127,50,.05); }
+.rank {
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  border-radius: 4px;
+  font-weight: 800;
+  font-size: 13px;
+  background: rgba(255,255,255,.06);
+}
+.rank.r1 { background: var(--gold); color: #1a1200; }
+.rank.r2 { background: var(--silver); color: #111; }
+.rank.r3 { background: var(--bronze); color: #fff; }
+.uid { font-variant-numeric: tabular-nums; color: #d0d4d8; letter-spacing: .04em; }
+.name-cell { font-weight: 600; letter-spacing: .02em; }
+.name-mask { color: #6b7280; font-weight: 800; letter-spacing: .08em; }
+.country { display: inline-flex; align-items: center; gap: 8px; color: #d7dbe0; }
+.country img { width: 22px; height: 16px; object-fit: cover; border-radius: 2px; }
+.roi { font-weight: 800; font-variant-numeric: tabular-nums; color: var(--cyan); }
+.roi.neg { color: #ff6b6b; }
+.empty {
+  padding: 56px 24px;
+  text-align: center;
+  color: var(--muted);
+}
+.empty h3 { color: #fff; margin-bottom: 8px; }
+
+.faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.faq {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 22px 20px;
+}
+.faq h3 { font-size: 16px; margin-bottom: 8px; }
+.faq p { color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+.cta-band {
+  background:
+    linear-gradient(90deg, rgba(0,229,209,.12), rgba(255,80,40,.08)),
+    var(--bg-2);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+}
+.cta-band h2 { font-size: clamp(28px, 4vw, 42px); margin: 10px 0 14px; }
+.disclaimer {
+  padding: 28px 0 40px;
+  color: #7d838b;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.footer {
+  border-top: 1px solid var(--line);
+  padding: 22px 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+.footer a { color: var(--cyan); text-decoration: none; }
+
+.mobile-cta {
+  display: none;
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 60;
+  padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+  background: rgba(10,11,13,.94);
+  border-top: 1px solid var(--line);
+  gap: 8px;
+}
+.mobile-menu {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: rgba(0,0,0,.55);
+}
+.mobile-menu.open { display: block; }
+.drawer {
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: min(320px, 86vw);
+  background: #121417;
+  border-left: 1px solid var(--line);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.drawer a { text-decoration: none; font-weight: 600; }
+
+@media (max-width: 980px) {
+  .nav-links { display: none; }
+  .menu-btn { display: inline-flex; align-items: center; justify-content: center; }
+  .stats, .steps, .faq-grid { grid-template-columns: 1fr 1fr; }
+  .prizes { grid-template-columns: 1fr; }
+  .prize.gold { transform: none; }
+  .topbar-left { display: none; }
+}
+@media (max-width: 720px) {
+  .stats, .steps, .faq-grid { grid-template-columns: 1fr; }
+  .hero { min-height: auto; }
+  .hero .wrap { padding: 48px 0 64px; }
+  .hero-ctas .btn-lg { width: 100%; }
+  .nav .wrap { min-height: 60px; }
+  .topbar { display: none; }
+  .nav-right > .btn { display: none; }
+  .mobile-cta { display: flex; }
+  body { padding-bottom: 74px; }
+  section { padding: 52px 0; }
+}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="wrap">
+    <div class="topbar-left">
+      <span data-i18n="top_note">Pertandingan IB FXUlti · keputusan dikemas kini setiap hari 08:00</span>
+    </div>
+    <div class="topbar-actions">
+      <a class="btn btn-cyan btn-sm" id="top-register" href="https://strex.live/la-my/my/hNuEu6Db" target="_blank" rel="noopener noreferrer" data-i18n="btn_open">BUKA AKAUN LANGSUNG</a>
+      <a class="btn btn-ghost btn-sm" href="https://www.startrader.com/" target="_blank" rel="noopener noreferrer">LOGIN</a>
+    </div>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+        <path fill="#fff" d="M16 2 L20.2 12.2 L30 16 L20.2 19.8 L16 30 L11.8 19.8 L2 16 L11.8 12.2 Z"/>
+        <circle cx="22.5" cy="12.2" r="2.1" fill="#00E5D1"/>
+      </svg>
+      <span class="brand-text">
+        <strong>FXULTI CUP</strong>
+        <small>On STARTRADER</small>
+      </span>
+    </a>
+    <div class="nav-links">
+      <a href="#overview" data-i18n="nav_overview">Gambaran</a>
+      <a href="#join" data-i18n="nav_join">Cara Sertai</a>
+      <a href="#board" data-i18n="nav_board">Papan Pendahulu</a>
+      <a href="#rules" data-i18n="nav_rules">Peraturan</a>
+    </div>
+    <div class="nav-right">
+      <select class="lang-select" id="lang" aria-label="Language">
+        <option value="ms" selected>Melayu</option>
+        <option value="en">English</option>
+        <option value="zh-CN">简体中文</option>
+      </select>
+      <a class="btn btn-cyan btn-md" id="nav-join" href="https://t.me/phou4200" target="_blank" rel="noopener noreferrer" data-i18n="btn_join">HUBUNGI KAMI</a>
+      <button class="menu-btn" id="menu-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <div class="drawer">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <strong>FXULTI CUP</strong>
+      <button class="menu-btn" id="menu-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <a href="#overview" data-i18n="nav_overview">Gambaran</a>
+    <a href="#join" data-i18n="nav_join">Cara Sertai</a>
+    <a href="#board" data-i18n="nav_board">Papan Pendahulu</a>
+    <a href="#rules" data-i18n="nav_rules">Peraturan</a>
+    <a class="btn btn-cyan btn-md" id="drawer-join" href="https://t.me/phou4200" target="_blank" rel="noopener noreferrer" data-i18n="btn_join">HUBUNGI KAMI</a>
+  </div>
+</div>
+
+<section class="hero" id="overview">
+  <div class="speed-lines"></div>
+  <div class="wrap">
+    <div class="kicker"><i class="fa-solid fa-bolt"></i><span id="hero-kicker">SEP 2026 · PIALA BULANAN</span></div>
+    <h1 id="hero-title">Berdagang. Berprestasi. <span>Menang.</span></h1>
+    <p class="hero-sub" data-i18n="hero_sub">Kejohanan akaun live bulanan di STARTRADER. Kedudukan mengikut ROI. Deposit minimum $50. Papan dikemas kini setiap pagi pada 08:00.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-cyan btn-lg" id="hero-join" href="https://t.me/phou4200" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-telegram"></i><span data-i18n="btn_join">HUBUNGI KAMI</span>
+      </a>
+      <a class="btn btn-outline btn-lg" id="hero-register" href="https://strex.live/la-my/my/hNuEu6Db" target="_blank" rel="noopener noreferrer">
+        <span data-i18n="btn_open_full">Buka akaun STARTRADER</span>
+      </a>
+    </div>
+    <div class="hero-pills">
+      <span class="pill"><i class="fa-solid fa-wallet"></i><span data-i18n="pill_min">Min. deposit $50</span></span>
+      <span class="pill"><i class="fa-solid fa-chart-line"></i><span data-i18n="pill_roi">Ranked by ROI</span></span>
+      <span class="pill"><i class="fa-solid fa-clock"></i><span data-i18n="pill_update">Daily update 08:00</span></span>
+      <span class="pill"><i class="fa-solid fa-calendar"></i><span data-i18n="pill_month">New season every month</span></span>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="stats">
+    <div class="stat-card"><small data-i18n="stat_min">Minimum deposit</small><strong>$50</strong></div>
+    <div class="stat-card"><small data-i18n="stat_metric">Ranking metric</small><strong>ROI</strong></div>
+    <div class="stat-card"><small data-i18n="stat_update">Daily update</small><strong>08:00</strong></div>
+    <div class="stat-card"><small data-i18n="stat_next">Kemas kini seterusnya</small><strong id="next-refresh" class="countdown">--:--:--</strong></div>
+  </div>
+</div>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker" data-i18n="prize_kicker">PRIZE PODIUM</div>
+      <h2 data-i18n="prize_title">This month's podium</h2>
+    </div>
+    <div class="prizes">
+      <article class="prize silver">
+        <div class="place">2ND</div>
+        <img class="prize-photo" data-prize-img="2" src="prizes/prize-2-goldbar.png" alt="1g 999 Gold Bar">
+        <h3 data-i18n="prize_2">Runner-up</h3>
+        <div class="amount" data-prize="2">1g 999 Gold</div>
+      </article>
+      <article class="prize gold">
+        <div class="place">1ST</div>
+        <img class="prize-photo" data-prize-img="1" src="prizes/prize-1-500u.png" alt="500 USDT Cash">
+        <h3 data-i18n="prize_1">Champion</h3>
+        <div class="amount" data-prize="1">500 USDT</div>
+      </article>
+      <article class="prize bronze">
+        <div class="place">3RD</div>
+        <img class="prize-photo" data-prize-img="3" src="prizes/prize-3-airpods.png" alt="AirPods 4">
+        <h3 data-i18n="prize_3">3rd Place</h3>
+        <div class="amount" data-prize="3">AirPods 4</div>
+      </article>
+    </div>
+    <p class="muted" style="margin-top:14px;font-size:13px" data-i18n="prize_note">Juara: tunai 500 USDT. Naib juara: gold bar 1g 999. Tempat ke-3: AirPods 4. Hadiah dihantar dalam 7 hari bekerja.</p>
+  </div>
+</section>
+
+<section id="join">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker" data-i18n="join_kicker">HOW TO JOIN</div>
+      <h2 data-i18n="join_title">Four steps. One monthly crown.</h2>
+    </div>
+    <div class="steps">
+      <article class="step">
+        <div class="step-no">1</div>
+        <h3 data-i18n="step1_t">Open a live account</h3>
+        <p data-i18n="step1_d">Register through the FXUlti STARTRADER link so your UID can be verified for the cup.</p>
+      </article>
+      <article class="step">
+        <div class="step-no">2</div>
+        <h3 data-i18n="step2_t">Deposit from $50</h3>
+        <p data-i18n="step2_d">Minimum live deposit is $50. Keep the account funded through the competition month.</p>
+      </article>
+      <article class="step">
+        <div class="step-no">3</div>
+        <h3 data-i18n="step3_t">Hantar maklumat pendaftaran</h3>
+        <p data-i18n="step3_d">Hantar User ID, e-mel dan maklumat akaun anda. Hubungi khidmat pelanggan untuk mendaftar.</p>
+      </article>
+      <article class="step">
+        <div class="step-no">4</div>
+        <h3 data-i18n="step4_t">Berdagang dan semak ROI</h3>
+        <p data-i18n="step4_d">Papan dikemas kini setiap hari 08:00. Keputusan rasmi dikira pada 1 haribulan berikutnya.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="board">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker" data-i18n="board_kicker">LIVE BOARD</div>
+      <h2 data-i18n="board_title">ROI leaderboard</h2>
+    </div>
+    <div class="board-panel">
+      <div class="board-toolbar">
+        <div>
+          <div class="updated"><i class="fa-solid fa-rotate"></i><span data-i18n="updated_label">Last update</span>&nbsp;<b id="updated-at">--</b></div>
+          <div class="demo-flag" id="demo-flag"><i class="fa-solid fa-triangle-exclamation"></i><span data-i18n="demo_note">Sample ranking — replace with live UIDs after registration opens</span></div>
+        </div>
+        <label class="search">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input id="board-search" type="search" data-i18n-placeholder="search_ph" placeholder="Cari User ID atau nama">
+        </label>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th data-i18n="col_rank">Rank</th>
+              <th data-i18n="col_uid">User ID</th>
+              <th data-i18n="col_name">Name</th>
+              <th data-i18n="col_country">Country</th>
+              <th data-i18n="col_roi">ROI</th>
+            </tr>
+          </thead>
+          <tbody id="board-body"></tbody>
+        </table>
+      </div>
+      <div class="empty" id="board-empty" hidden>
+        <h3 data-i18n="empty_t">Board opens with the first official update</h3>
+        <p data-i18n="empty_d">Register now. Rankings appear after STARTRADER sends the daily file.</p>
+      </div>
+    </div>
+    <p class="muted" style="margin-top:14px;font-size:13px" data-i18n="uid_note">Nama KYC dipaparkan dengan bahagian tengah ditutup ****, contoh AHMAD **** ISMAIL.</p>
+  </div>
+</section>
+
+<section id="rules">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker" data-i18n="rules_kicker">RULES & FAQ</div>
+      <h2 data-i18n="rules_title">How ranking works</h2>
+    </div>
+    <div class="faq-grid">
+      <article class="faq">
+        <h3 data-i18n="faq_who_t">Siapa boleh sertai?</h3>
+        <p data-i18n="faq_who_d">Sesiapa yang bekerjasama dengan FXUlti boleh menyertai. Untuk butiran, tanya khidmat pelanggan.</p>
+      </article>
+      <article class="faq">
+        <h3 data-i18n="faq_name_t">Nama di papan</h3>
+        <p data-i18n="faq_name_d">Nama KYC dipaparkan dengan bahagian tengah ditutup ****, contoh AHMAD **** ISMAIL.</p>
+      </article>
+      <article class="faq">
+        <h3 data-i18n="faq_final_t">Bila keputusan dikira?</h3>
+        <p data-i18n="faq_final_d">Papan harian dikemas kini setiap 08:00. Keputusan rasmi bulan tersebut dikira pada 1 haribulan berikutnya.</p>
+      </article>
+      <article class="faq">
+        <h3 data-i18n="faq_prize_t">Bila hadiah dihantar?</h3>
+        <p data-i18n="faq_prize_d">Hadiah pemenang akan dihantar dalam 7 hari bekerja.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <div class="kicker" data-i18n="cta_kicker">CABARAN TERBUKA</div>
+    <h2 data-i18n="cta_title">Adakah Anda Juara Dagangan Malaysia yang Seterusnya?</h2>
+    <p class="muted" style="max-width:560px;margin:0 auto 22px" data-i18n="cta_sub">Hantar User ID, e-mel dan maklumat akaun. Hubungi khidmat pelanggan untuk mendaftar.</p>
+    <div class="hero-ctas" style="justify-content:center">
+      <a class="btn btn-cyan btn-lg" id="cta-join" href="https://t.me/phou4200" target="_blank" rel="noopener noreferrer">
+        <i class="fa-brands fa-telegram"></i><span data-i18n="btn_join">HUBUNGI KAMI</span>
+      </a>
+      <a class="btn btn-outline btn-lg" href="#board"> <span data-i18n="btn_home">View leaderboard</span></a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <p class="disclaimer" data-i18n="disclaimer">Amaran risiko: Dagangan berleveraj forex dan CFD melibatkan risiko kerugian yang besar dan tidak sesuai untuk semua pelabur. Laman ini ialah promosi IB FXUlti. ROI lepas tidak meramal hasil masa depan. Peraturan pengiklanan kewangan tempatan mungkin terpakai.</p>
+  <div class="footer">
+    <span>© 2026 FXUlti · STARTRADER Trader Cup</span>
+    <a href="https://t.me/phou4200" target="_blank" rel="noopener noreferrer">Khidmat Pelanggan</a>
+  </div>
+</div>
+
+<div class="mobile-cta">
+  <a class="btn btn-outline btn-md" id="m-register" href="https://strex.live/la-my/my/hNuEu6Db" target="_blank" rel="noopener noreferrer" style="flex:1" data-i18n="btn_open">BUKA AKAUN LANGSUNG</a>
+  <a class="btn btn-cyan btn-md" id="m-join" href="https://t.me/phou4200" target="_blank" rel="noopener noreferrer" style="flex:1" data-i18n="btn_join">HUBUNGI KAMI</a>
+</div>
+
+<script>
+const COUNTRY_NAMES = {
+  MY: { en: "Malaysia", ms: "Malaysia", "zh-CN": "马来西亚" },
+  ID: { en: "Indonesia", ms: "Indonesia", "zh-CN": "印尼" },
+  SG: { en: "Singapore", ms: "Singapura", "zh-CN": "新加坡" },
+  CN: { en: "China", ms: "China", "zh-CN": "中国" },
+  TH: { en: "Thailand", ms: "Thailand", "zh-CN": "泰国" },
+  VN: { en: "Vietnam", ms: "Vietnam", "zh-CN": "越南" },
+  PH: { en: "Philippines", ms: "Filipina", "zh-CN": "菲律宾" },
+  HK: { en: "Hong Kong", ms: "Hong Kong", "zh-CN": "香港" },
+  TW: { en: "Taiwan", ms: "Taiwan", "zh-CN": "台湾" },
+  AU: { en: "Australia", ms: "Australia", "zh-CN": "澳洲" }
+};
+
+const I18N = {
+  en: {
+    top_note: "FXUlti IB competition · results updated daily 08:00",
+    btn_open: "OPEN LIVE ACCOUNT",
+    btn_open_full: "Open STARTRADER account",
+    btn_join: "CONTACT US",
+    btn_home: "View leaderboard",
+    nav_overview: "Overview",
+    nav_join: "How to Join",
+    nav_board: "Leaderboard",
+    nav_rules: "Rules",
+    hero_title: "Trade. Rank. Win.",
+    hero_sub: "A monthly live-account championship on STARTRADER. Ranked by ROI. Minimum deposit $50. The board refreshes every morning at 08:00.",
+    pill_min: "Min. deposit $50",
+    pill_roi: "Ranked by ROI",
+    pill_update: "Daily update 08:00",
+    pill_month: "New season every month",
+    stat_min: "Minimum deposit",
+    stat_metric: "Ranking metric",
+    stat_update: "Daily update",
+    stat_next: "Next refresh",
+    prize_kicker: "PRIZE PODIUM",
+    prize_title: "This month's podium",
+    prize_1: "Champion",
+    prize_2: "Runner-up",
+    prize_3: "3rd Place",
+    prize_note: "Champion: 500 USDT cash. Runner-up: 1g 999 gold bar. 3rd place: AirPods 4. Prizes ship within 7 working days.",
+    prize_tba: "TBA",
+    join_kicker: "HOW TO JOIN",
+    join_title: "Four steps. One monthly crown.",
+    step1_t: "Open a live account",
+    step1_d: "Register through the FXUlti link to join this month's cup.",
+    step2_t: "Deposit from $50",
+    step2_d: "Minimum live deposit is $50. Keep the account funded through the competition month.",
+    step3_t: "Submit registration details",
+    step3_d: "Submit your User ID, email, and account information. Contact customer service to complete registration.",
+    step4_t: "Trade and check ROI",
+    step4_d: "The board updates every day at 08:00. Official results are counted on the 1st of the following month.",
+    board_kicker: "LIVE BOARD",
+    board_title: "ROI leaderboard",
+    updated_label: "Last update",
+    demo_note: "Sample ranking — replace with live User IDs after registration opens",
+    search_ph: "Search User ID or name",
+    col_rank: "Rank",
+    col_uid: "User ID",
+    col_name: "Name",
+    col_country: "Country",
+    col_roi: "ROI",
+    empty_t: "Board opens with the first official update",
+    empty_d: "Register now with your User ID, email, and account details. Rankings appear after the daily 08:00 update.",
+    uid_note: "KYC names are shown with the middle hidden as ****, e.g. AHMAD **** ISMAIL.",
+    rules_kicker: "RULES & FAQ",
+    rules_title: "How ranking works",
+    faq_who_t: "Who can join?",
+    faq_who_d: "Anyone who partners with FXUlti can join. For details, contact customer service.",
+    faq_name_t: "Names on the board",
+    faq_name_d: "KYC names are shown with the middle hidden as ****, e.g. AHMAD **** ISMAIL.",
+    faq_final_t: "When are results counted?",
+    faq_final_d: "The daily board updates at 08:00. Official monthly results are counted on the 1st of the following month.",
+    faq_prize_t: "When are prizes shipped?",
+    faq_prize_d: "Winners' prizes will be shipped within 7 working days.",
+    cta_kicker: "OPEN CHALLENGE",
+    cta_title: "Are you Malaysia's next trading champion?",
+    cta_sub: "Submit your User ID, email, and account information. Contact customer service to register.",
+    disclaimer: "Risk warning: Leveraged trading in forex and CFDs involves substantial risk of loss and is not suitable for all investors. This page is an FXUlti IB promotion. Past ROI does not predict future results. Local advertising and financial-promotion rules may apply in your country.",
+    tg_msg: "Hi, I want to join the FXUlti STARTRADER Trader Cup.\nUser ID:\nEmail:\nAccount details:"
+  },
+  ms: {
+    top_note: "Pertandingan IB FXUlti · keputusan dikemas kini setiap hari 08:00",
+    btn_open: "BUKA AKAUN LANGSUNG",
+    btn_open_full: "Buka akaun STARTRADER",
+    btn_join: "HUBUNGI KAMI",
+    btn_home: "Lihat papan pendahulu",
+    nav_overview: "Gambaran",
+    nav_join: "Cara Sertai",
+    nav_board: "Papan Pendahulu",
+    nav_rules: "Peraturan",
+    hero_title: "Berdagang. Berprestasi. Menang.",
+    hero_sub: "Kejohanan akaun live bulanan di STARTRADER. Kedudukan mengikut ROI. Deposit minimum $50. Papan dikemas kini setiap pagi pada 08:00.",
+    pill_min: "Deposit min. $50",
+    pill_roi: "Kedudukan mengikut ROI",
+    pill_update: "Kemas kini harian 08:00",
+    pill_month: "Musim baharu setiap bulan",
+    stat_min: "Deposit minimum",
+    stat_metric: "Metrik kedudukan",
+    stat_update: "Kemas kini harian",
+    stat_next: "Kemas kini seterusnya",
+    prize_kicker: "PODIUM HADIAH",
+    prize_title: "Podium bulan ini",
+    prize_1: "Juara",
+    prize_2: "Naib juara",
+    prize_3: "Tempat ke-3",
+    prize_note: "Juara: tunai 500 USDT. Naib juara: gold bar 1g 999. Tempat ke-3: AirPods 4. Hadiah dihantar dalam 7 hari bekerja.",
+    prize_tba: "Akan diumumkan",
+    join_kicker: "CARA SERTAI",
+    join_title: "Empat langkah. Satu mahkota bulanan.",
+    step1_t: "Buka akaun live",
+    step1_d: "Daftar melalui pautan FXUlti untuk menyertai piala bulan ini.",
+    step2_t: "Deposit dari $50",
+    step2_d: "Deposit live minimum $50. Kekalkan akaun berdana sepanjang bulan pertandingan.",
+    step3_t: "Hantar maklumat pendaftaran",
+    step3_d: "Hantar User ID, e-mel dan maklumat akaun anda. Hubungi khidmat pelanggan untuk mendaftar.",
+    step4_t: "Berdagang dan semak ROI",
+    step4_d: "Papan dikemas kini setiap hari 08:00. Keputusan rasmi dikira pada 1 haribulan berikutnya.",
+    board_kicker: "PAPAN LANGSUNG",
+    board_title: "Papan pendahulu ROI",
+    updated_label: "Kemas kini terakhir",
+    demo_note: "Contoh kedudukan — ganti dengan User ID sebenar selepas pendaftaran dibuka",
+    search_ph: "Cari User ID atau nama",
+    col_rank: "Kedudukan",
+    col_uid: "User ID",
+    col_name: "Nama",
+    col_country: "Negara",
+    col_roi: "ROI",
+    empty_t: "Papan dibuka dengan kemas kini rasmi pertama",
+    empty_d: "Daftar sekarang dengan User ID, e-mel dan maklumat akaun. Kedudukan muncul selepas kemas kini 08:00.",
+    uid_note: "Nama KYC dipaparkan dengan bahagian tengah ditutup ****, contoh AHMAD **** ISMAIL.",
+    rules_kicker: "PERATURAN & SOALAN",
+    rules_title: "Bagaimana kedudukan dikira",
+    faq_who_t: "Siapa boleh sertai?",
+    faq_who_d: "Sesiapa yang bekerjasama dengan FXUlti boleh menyertai. Untuk butiran, tanya khidmat pelanggan.",
+    faq_name_t: "Nama di papan",
+    faq_name_d: "Nama KYC dipaparkan dengan bahagian tengah ditutup ****, contoh AHMAD **** ISMAIL.",
+    faq_final_t: "Bila keputusan dikira?",
+    faq_final_d: "Papan harian dikemas kini setiap 08:00. Keputusan rasmi bulan tersebut dikira pada 1 haribulan berikutnya.",
+    faq_prize_t: "Bila hadiah dihantar?",
+    faq_prize_d: "Hadiah pemenang akan dihantar dalam 7 hari bekerja.",
+    cta_kicker: "CABARAN TERBUKA",
+    cta_title: "Adakah Anda Juara Dagangan Malaysia yang Seterusnya?",
+    cta_sub: "Hantar User ID, e-mel dan maklumat akaun. Hubungi khidmat pelanggan untuk mendaftar.",
+    disclaimer: "Amaran risiko: Dagangan berleveraj forex dan CFD melibatkan risiko kerugian yang besar dan tidak sesuai untuk semua pelabur. Laman ini ialah promosi IB FXUlti. ROI lepas tidak meramal hasil masa depan. Peraturan pengiklanan kewangan tempatan mungkin terpakai.",
+    tg_msg: "Hi, saya mahu sertai FXUlti STARTRADER Trader Cup.\nUser ID:\nE-mel:\nMaklumat akaun:"
+  },
+  "zh-CN": {
+    top_note: "FXUlti IB 交易员比赛 · 成绩每天 08:00 更新",
+    btn_open: "立即开户",
+    btn_open_full: "开通 STARTRADER 账户",
+    btn_join: "联系客服",
+    btn_home: "查看成绩榜",
+    nav_overview: "赛事概览",
+    nav_join: "如何参赛",
+    nav_board: "成绩榜",
+    nav_rules: "规则",
+    hero_title: "交易. 排名. 夺冠.",
+    hero_sub: "每月一场 STARTRADER 真实账户锦标赛。按 ROI 排名，最低入金 $50，每天早上 08:00 更新榜单。",
+    pill_min: "最低入金 $50",
+    pill_roi: "按 ROI 排名",
+    pill_update: "每天 08:00 更新",
+    pill_month: "每月一届",
+    stat_min: "最低入金",
+    stat_metric: "排名方式",
+    stat_update: "每日更新",
+    stat_next: "下次刷新",
+    prize_kicker: "奖台",
+    prize_title: "本月领奖台",
+    prize_1: "冠军",
+    prize_2: "亚军",
+    prize_3: "季军",
+    prize_note: "冠军 500 USDT 现金，亚军 1克 999 金条，季军 AirPods 4。奖品将于 7 个工作日内发货。",
+    prize_tba: "即将公布",
+    join_kicker: "参赛流程",
+    join_title: "四步参赛，每月一冠",
+    step1_t: "开通真实账户",
+    step1_d: "通过 FXUlti 链接开户，即可参加本月杯赛。",
+    step2_t: "入金至少 $50",
+    step2_d: "真实账户最低入金 $50。比赛月内请保持账户有效。",
+    step3_t: "提交报名资料",
+    step3_d: "提交 User ID、邮箱及账号信息，联系客服即可完成报名。",
+    step4_t: "交易并查看 ROI",
+    step4_d: "榜单每天 08:00 更新。正式成绩在次月 1 日统计。",
+    board_kicker: "实时榜单",
+    board_title: "ROI 成绩榜",
+    updated_label: "最近更新",
+    demo_note: "当前为示例榜单 — 正式报名后将替换为真实 User ID",
+    search_ph: "搜索 User ID 或姓名",
+    col_rank: "排名",
+    col_uid: "User ID",
+    col_name: "名字",
+    col_country: "国家",
+    col_roi: "ROI",
+    empty_t: "首份官方数据到达后开榜",
+    empty_d: "现在提交 User ID、邮箱及账号信息即可报名。每天 08:00 更新后会出现排名。",
+    uid_note: "KYC 姓名中间用 **** 遮住，例如 AHMAD **** ISMAIL。",
+    rules_kicker: "规则与问答",
+    rules_title: "排名怎么算",
+    faq_who_t: "谁可以参加？",
+    faq_who_d: "任何与 FXUlti 合作的人都可以参加。详情请询问客服。",
+    faq_name_t: "榜上的名字",
+    faq_name_d: "KYC 姓名中间用 **** 遮住，例如 AHMAD **** ISMAIL。",
+    faq_final_t: "成绩什么时候统计？",
+    faq_final_d: "日榜每天 08:00 更新。当月正式成绩在次月 1 日统计。",
+    faq_prize_t: "奖品什么时候发货？",
+    faq_prize_d: "得奖者的奖品将在 7 个工作日内发货。",
+    cta_kicker: "公开挑战",
+    cta_title: "你是否是下一位全马交易冠军？",
+    cta_sub: "提交 User ID、邮箱及账号信息，联系客服即可报名。",
+    disclaimer: "风险提示：外汇与差价合约杠杆交易存在重大亏损风险，并不适合所有投资者。本页是 FXUlti IB 推广活动。过往 ROI 不代表未来表现。你所在地区可能适用金融广告与推广监管规定。",
+    tg_msg: "你好，我想参加 FXUlti STARTRADER 交易员比赛。\nUser ID：\n邮箱：\n账号信息："
+  }
+};
+
+let DATA = null;
+let LANG = "ms";
+
+function dict() {
+  return I18N[LANG] || I18N.ms;
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, (c) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  }[c]));
+}
+
+function maskKycName(name) {
+  const raw = String(name || "").trim().replace(/\s+/g, " ");
+  if (!raw) return "****";
+  if (/\*{2,}/.test(raw)) return raw;
+  const parts = raw.split(" ");
+  if (parts.length >= 2) return parts[0] + " **** " + parts[parts.length - 1];
+  const chars = Array.from(raw);
+  if (chars.length <= 2) return chars[0] + "****";
+  return chars[0] + "****" + chars[chars.length - 1];
+}
+
+function formatMaskedName(name) {
+  return escapeHtml(maskKycName(name)).replace(/\*{2,}/g, '<span class="name-mask">$&</span>');
+}
+
+function applyI18n() {
+  const d = dict();
+  document.querySelectorAll("[data-i18n]").forEach((el) => {
+    const key = el.getAttribute("data-i18n");
+    if (d[key]) el.textContent = d[key];
+  });
+  document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-placeholder");
+    if (d[key]) el.setAttribute("placeholder", d[key]);
+  });
+  document.documentElement.lang = LANG;
+  const title = DATA && DATA.month ? ("FXUlti Trader Cup · " + DATA.month) : "FXUlti Trader Cup · STARTRADER";
+  document.title = title;
+  const hero = document.getElementById("hero-title");
+  if (hero) {
+    const raw = d.hero_title || "";
+    const parts = raw.split(/(Win\.|Menang\.|夺冠\.)/);
+    if (parts.length >= 2) hero.innerHTML = parts[0] + "<span>" + parts[1] + "</span>";
+    else hero.textContent = raw;
+  }
+  if (DATA) {
+    const mk = DATA.monthShort && (DATA.monthShort[LANG] || DATA.monthShort.en);
+    document.getElementById("hero-kicker").textContent = (mk || DATA.month || "") + " · " + (LANG === "zh-CN" ? "每月杯赛" : LANG === "ms" ? "Piala Bulanan" : "MONTHLY CUP");
+  }
+  setTelegramLinks();
+}
+
+function telegramHref() {
+  const user = (DATA && DATA.telegram) || "phou4200";
+  return "https://t.me/" + user + "?text=" + encodeURIComponent(dict().tg_msg);
+}
+
+function setTelegramLinks() {
+  const href = telegramHref();
+  ["nav-join","hero-join","cta-join","drawer-join","m-join"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.href = href;
+  });
+}
+
+function countryLabel(code) {
+  const row = COUNTRY_NAMES[code];
+  if (!row) return code;
+  return row[LANG] || row.en || code;
+}
+
+function renderPrizes() {
+  const tba = dict().prize_tba || "TBA";
+  const list = (DATA && DATA.prizes) || [];
+  list.forEach((p) => {
+    const el = document.querySelector('[data-prize="' + p.place + '"]');
+    if (el) el.textContent = p.amount ? p.amount : tba;
+    const img = document.querySelector('[data-prize-img="' + p.place + '"]');
+    if (img && p.image) img.src = p.image;
+  });
+}
+
+function sortedTraders() {
+  const rows = ((DATA && DATA.traders) || []).slice();
+  rows.sort((a, b) => Number(b.roi) - Number(a.roi));
+  return rows;
+}
+
+function renderBoard(filter) {
+  const body = document.getElementById("board-body");
+  const empty = document.getElementById("board-empty");
+  const q = (filter || "").trim().toLowerCase();
+  const rows = sortedTraders().filter((t) => {
+    if (!q) return true;
+    const full = String(t.name || "").toLowerCase();
+    const masked = maskKycName(t.name).toLowerCase();
+    return String(t.uid).toLowerCase().includes(q) || full.includes(q) || masked.includes(q);
+  });
+  body.innerHTML = "";
+  if (!rows.length) {
+    empty.hidden = !(((DATA && DATA.traders) || []).length === 0);
+    if (((DATA && DATA.traders) || []).length === 0) {
+      empty.hidden = false;
+    } else {
+      empty.hidden = true;
+      body.innerHTML = '<tr><td colspan="5" class="muted" style="text-align:center;padding:28px">' + (LANG === "zh-CN" ? "没有匹配的 User ID / 姓名" : LANG === "ms" ? "Tiada User ID / nama sepadan" : "No matching User ID / name") + "</td></tr>";
+    }
+    return;
+  }
+  empty.hidden = true;
+  rows.forEach((t, i) => {
+    const rank = i + 1;
+    const cls = rank === 1 ? "top1" : rank === 2 ? "top2" : rank === 3 ? "top3" : "";
+    const rcls = rank <= 3 ? "rank r" + rank : "rank";
+    const roi = Number(t.roi);
+    const roiCls = roi < 0 ? "roi neg" : "roi";
+    const cc = String(t.country || "").toLowerCase();
+    const flag = cc ? "https://flagcdn.com/w40/" + cc + ".png" : "";
+    const tr = document.createElement("tr");
+    tr.className = cls;
+    tr.innerHTML =
+      '<td><span class="' + rcls + '">' + rank + "</span></td>" +
+      '<td class="uid">' + String(t.uid) + "</td>" +
+      '<td class="name-cell">' + formatMaskedName(t.name) + "</td>" +
+      '<td><span class="country">' + (flag ? '<img src="' + flag + '" alt="">' : "") + countryLabel(t.country) + "</span></td>" +
+      '<td class="' + roiCls + '">' + (roi > 0 ? "+" : "") + roi.toFixed(2) + "%</td>";
+    body.appendChild(tr);
+  });
+}
+
+function nextRefreshMs() {
+  const hour = (DATA && DATA.updateHour) || 8;
+  const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Kuala_Lumpur" }));
+  const next = new Date(now);
+  next.setHours(hour, 0, 0, 0);
+  if (now >= next) next.setDate(next.getDate() + 1);
+  return Math.max(0, next.getTime() - now.getTime());
+}
+
+function formatCountdown(ms) {
+  const total = Math.floor(ms / 1000);
+  const h = Math.floor(total / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  const s = total % 60;
+  const pad = (n) => String(n).padStart(2, "0");
+  return pad(h) + ":" + pad(m) + ":" + pad(s);
+}
+
+function tickCountdown() {
+  const el = document.getElementById("next-refresh");
+  if (el) el.textContent = formatCountdown(nextRefreshMs());
+}
+
+function hydrate() {
+  applyI18n();
+  if (!DATA) return;
+  document.getElementById("updated-at").textContent = DATA.updatedAt || "--";
+  tickCountdown();
+  if (!window.__cupCountdown) {
+    window.__cupCountdown = setInterval(tickCountdown, 1000);
+  }
+  document.getElementById("demo-flag").classList.toggle("show", !!DATA.demo);
+  const url = DATA.registerUrl || "https://strex.live/la-my/my/hNuEu6Db";
+  ["top-register","hero-register","m-register"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) el.href = url;
+  });
+  renderPrizes();
+  renderBoard(document.getElementById("board-search").value);
+}
+
+document.getElementById("lang").addEventListener("change", (e) => {
+  LANG = e.target.value;
+  try { localStorage.setItem("stcup_lang", LANG); } catch (err) {}
+  hydrate();
+});
+document.getElementById("board-search").addEventListener("input", (e) => renderBoard(e.target.value));
+document.getElementById("menu-btn").addEventListener("click", () => document.getElementById("mobile-menu").classList.add("open"));
+document.getElementById("menu-close").addEventListener("click", () => document.getElementById("mobile-menu").classList.remove("open"));
+document.getElementById("mobile-menu").addEventListener("click", (e) => {
+  if (e.target.id === "mobile-menu" || e.target.closest(".drawer a")) document.getElementById("mobile-menu").classList.remove("open");
+});
+
+try {
+  const saved = localStorage.getItem("stcup_lang");
+  if (saved && I18N[saved]) LANG = saved;
+} catch (e) {}
+document.getElementById("lang").value = LANG;
+applyI18n();
+tickCountdown();
+if (!window.__cupCountdown) window.__cupCountdown = setInterval(tickCountdown, 1000);
+
+fetch("./data/competition.json", { cache: "no-store" })
+  .then((r) => r.json())
+  .then((json) => { DATA = json; hydrate(); })
+  .catch(() => { hydrate(); });
+</script>
+</body>
+</html>

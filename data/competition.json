@@ -1,0 +1,32 @@
+{
+  "_guide": "每天把 UID/Acc ID、KYC全名、ROI 填进 traders，并改 updatedAt。网页会自动把姓名中间打成 ****（例如 AHMAD BIN ISMAIL → AHMAD **** ISMAIL）。",
+  "month": "September 2026",
+  "monthShort": { "en": "Sep 2026", "ms": "Sep 2026", "zh-CN": "2026年9月" },
+  "startDate": "2026-09-01",
+  "endDate": "2026-09-30",
+  "timezone": "Asia/Kuala_Lumpur",
+  "updateHour": 8,
+  "updatedAt": "2026-09-02 08:00",
+  "minDeposit": 50,
+  "status": "live",
+  "demo": true,
+  "registerUrl": "https://strex.live/la-my/my/hNuEu6Db",
+  "telegram": "phou4200",
+  "prizes": [
+    { "place": 1, "amount": "500 USDT", "image": "prizes/prize-1-500u.png" },
+    { "place": 2, "amount": "1g 999 Gold", "image": "prizes/prize-2-goldbar.png" },
+    { "place": 3, "amount": "AirPods 4", "image": "prizes/prize-3-airpods.png" }
+  ],
+  "traders": [
+    { "uid": "81245601", "name": "AHMAD BIN ISMAIL", "country": "MY", "roi": 38.42 },
+    { "uid": "80933174", "name": "NUR AISYAH RAHMAN", "country": "MY", "roi": 31.18 },
+    { "uid": "82190055", "name": "MUHAMMAD FARID HASSAN", "country": "MY", "roi": 27.65 },
+    { "uid": "80567229", "name": "SITI AMINAH YUSOF", "country": "MY", "roi": 22.09 },
+    { "uid": "81800412", "name": "HAZIQ BIN ABDULLAH", "country": "MY", "roi": 18.73 },
+    { "uid": "80344890", "name": "FATIMAH ZAHRA ALI", "country": "MY", "roi": 14.26 },
+    { "uid": "81677203", "name": "AMIRUL HAKIM RAZAK", "country": "MY", "roi": 9.84 },
+    { "uid": "82211960", "name": "AINUL MARDHIAH OSMAN", "country": "MY", "roi": 6.51 },
+    { "uid": "80733048", "name": "DANIAL BIN KAMAL", "country": "MY", "roi": 3.12 },
+    { "uid": "81455927", "name": "SYAFIQAH BINTI IDRIS", "country": "MY", "roi": -2.47 }
+  ]
+}
