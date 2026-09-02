@@ -143,15 +143,64 @@ img { max-width: 100%; display: block; }
 .nav-links a { text-decoration: none; color: #e8eaed; }
 .nav-links a:hover { color: var(--cyan); }
 .nav-right { display: flex; align-items: center; gap: 10px; }
+.lang-wrap { position: relative; }
 .lang-select {
-  background: transparent;
+  background: #0b1220;
   color: #fff;
   border: 1px solid var(--line);
   border-radius: 4px;
   height: 36px;
-  padding: 0 8px;
+  padding: 0 10px;
   font-size: 12px;
   font-family: inherit;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 108px;
+}
+.lang-select::after {
+  content: "";
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid #fff;
+  margin-left: auto;
+}
+.lang-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 6px);
+  min-width: 140px;
+  background: #0b1220;
+  border: 1px solid rgba(255,255,255,.16);
+  border-radius: 6px;
+  padding: 6px;
+  z-index: 80;
+  box-shadow: 0 12px 32px rgba(0,0,0,.45);
+}
+.lang-wrap.open .lang-menu { display: block; }
+.lang-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  background: #0b1220;
+  color: #ffffff;
+  border: 0;
+  padding: 9px 10px;
+  border-radius: 4px;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.lang-menu button:hover,
+.lang-menu button[aria-selected="true"] {
+  background: #143834;
+  color: #00e5d1;
 }
 .menu-btn {
   display: none;
@@ -558,11 +607,14 @@ tbody tr.top3 { background: rgba(205,127,50,.05); }
       <a href="#rules" data-i18n="nav_rules">Peraturan</a>
     </div>
     <div class="nav-right">
-      <select class="lang-select" id="lang" aria-label="Language">
-        <option value="ms" selected>Melayu</option>
-        <option value="en">English</option>
-        <option value="zh-CN">简体中文</option>
-      </select>
+      <div class="lang-wrap" id="lang-wrap">
+        <button type="button" class="lang-select" id="lang-btn" aria-label="Language" aria-haspopup="listbox" aria-expanded="false">Melayu</button>
+        <div class="lang-menu" id="lang-menu" role="listbox">
+          <button type="button" role="option" data-value="ms" aria-selected="true">Melayu</button>
+          <button type="button" role="option" data-value="en" aria-selected="false">English</button>
+          <button type="button" role="option" data-value="zh-CN" aria-selected="false">简体中文</button>
+        </div>
+      </div>
       <a class="btn btn-cyan btn-md" id="nav-join" href="https://t.me/phou4200" target="_blank" rel="noopener noreferrer" data-i18n="btn_join">HUBUNGI KAMI</a>
       <button class="menu-btn" id="menu-btn" aria-label="Menu"><i class="fa-solid fa-bars"></i></button>
     </div>
@@ -1163,10 +1215,33 @@ function hydrate() {
   renderBoard(document.getElementById("board-search").value);
 }
 
-document.getElementById("lang").addEventListener("change", (e) => {
-  LANG = e.target.value;
+const LANG_LABELS = { ms: "Melayu", en: "English", "zh-CN": "简体中文" };
+function setLang(next) {
+  LANG = next;
   try { localStorage.setItem("stcup_lang", LANG); } catch (err) {}
+  const btn = document.getElementById("lang-btn");
+  const wrap = document.getElementById("lang-wrap");
+  btn.textContent = LANG_LABELS[LANG] || LANG;
+  btn.setAttribute("aria-expanded", "false");
+  wrap.classList.remove("open");
+  document.querySelectorAll("#lang-menu [data-value]").forEach((el) => {
+    el.setAttribute("aria-selected", el.dataset.value === LANG ? "true" : "false");
+  });
   hydrate();
+}
+document.getElementById("lang-btn").addEventListener("click", (e) => {
+  e.stopPropagation();
+  const wrap = document.getElementById("lang-wrap");
+  const open = wrap.classList.toggle("open");
+  document.getElementById("lang-btn").setAttribute("aria-expanded", open ? "true" : "false");
+});
+document.getElementById("lang-menu").addEventListener("click", (e) => {
+  const item = e.target.closest("[data-value]");
+  if (item) setLang(item.dataset.value);
+});
+document.addEventListener("click", () => {
+  document.getElementById("lang-wrap").classList.remove("open");
+  document.getElementById("lang-btn").setAttribute("aria-expanded", "false");
 });
 document.getElementById("board-search").addEventListener("input", (e) => renderBoard(e.target.value));
 document.getElementById("menu-btn").addEventListener("click", () => document.getElementById("mobile-menu").classList.add("open"));
@@ -1179,7 +1254,10 @@ try {
   const saved = localStorage.getItem("stcup_lang");
   if (saved && I18N[saved]) LANG = saved;
 } catch (e) {}
-document.getElementById("lang").value = LANG;
+document.getElementById("lang-btn").textContent = LANG_LABELS[LANG] || LANG;
+document.querySelectorAll("#lang-menu [data-value]").forEach((el) => {
+  el.setAttribute("aria-selected", el.dataset.value === LANG ? "true" : "false");
+});
 applyI18n();
 tickCountdown();
 if (!window.__cupCountdown) window.__cupCountdown = setInterval(tickCountdown, 1000);
