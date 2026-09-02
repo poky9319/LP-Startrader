@@ -336,6 +336,8 @@ section { padding: 72px 0; scroll-margin-top: 84px; }
   border-radius: 10px;
   padding: 22px 18px 24px;
   text-align: center;
+  max-width: 100%;
+  overflow: hidden;
 }
 .prize.gold {
   background: linear-gradient(180deg, rgba(240,193,75,.12), rgba(23,25,29,.9));
@@ -346,7 +348,10 @@ section { padding: 72px 0; scroll-margin-top: 84px; }
 .prize-photo {
   width: 100%;
   aspect-ratio: 1;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center;
+  padding: 10px;
+  box-sizing: border-box;
   border-radius: 8px;
   margin: 14px 0 14px;
   background: #050505;
@@ -585,11 +590,14 @@ tbody tr.top3 { background: rgba(205,127,50,.05); }
   .hero::before {
     position: relative;
     inset: auto;
-    height: 148px;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 4 / 3;
     opacity: 1;
     background:
-      linear-gradient(180deg, rgba(10,11,13,.12) 0%, rgba(10,11,13,.78) 70%, #0a0b0d 100%),
-      url("banner-hero.png") center 32% / cover no-repeat;
+      linear-gradient(180deg, transparent 82%, #0a0b0d 100%),
+      url("banner-hero-mobile.png") center center / cover no-repeat;
   }
   .speed-lines { display: none; }
   .hero .wrap { padding: 22px 0 20px; }
@@ -627,7 +635,7 @@ tbody tr.top3 { background: rgba(205,127,50,.05); }
   .section-head h2 { font-size: 24px; }
   .prizes { gap: 12px; }
   .prize { padding: 16px 14px 18px; }
-  .prize-photo { aspect-ratio: 16 / 10; max-height: 180px; margin: 10px 0 12px; }
+  .prize-photo { aspect-ratio: 1; max-height: none; object-fit: contain; }
   .prize .amount { font-size: 18px; }
   .steps { gap: 10px; }
   .step {
