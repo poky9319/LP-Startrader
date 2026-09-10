@@ -117,7 +117,7 @@ img { max-width: 100%; display: block; }
   text-decoration: none;
   min-width: 0;
 }
-.brand-mark { width: 28px; height: 28px; flex-shrink: 0; }
+.brand-mark { width: 36px; height: 36px; flex-shrink: 0; display: block; object-fit: contain; }
 .brand-text { display: flex; flex-direction: column; line-height: 1.1; }
 .brand-text strong {
   font-size: 15px;
@@ -572,7 +572,7 @@ tbody tr.top3 { background: rgba(205,127,50,.05); }
   .nav { padding-top: env(safe-area-inset-top); }
   .nav .wrap { min-height: 56px; gap: 8px; }
   .brand { gap: 8px; }
-  .brand-mark { width: 22px; height: 22px; }
+  .brand-mark { width: 30px; height: 30px; }
   .brand-text strong { font-size: 12px; letter-spacing: .1em; }
   .brand-text small { font-size: 8px; letter-spacing: .12em; }
   .lang-select { min-width: 0; height: 34px; font-size: 11px; padding: 0 8px; border-color: rgba(255,255,255,.22); }
@@ -713,10 +713,7 @@ tbody tr.top3 { background: rgba(205,127,50,.05); }
 <nav class="nav">
   <div class="wrap">
     <a class="brand" href="/">
-      <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
-        <path fill="#fff" d="M16 2 L20.2 12.2 L30 16 L20.2 19.8 L16 30 L11.8 19.8 L2 16 L11.8 12.2 Z"/>
-        <circle cx="22.5" cy="12.2" r="2.1" fill="#00E5D1"/>
-      </svg>
+      <img class="brand-mark" src="logo-fx.png" alt="FXUlti">
       <span class="brand-text">
         <strong>FXULTI CUP</strong>
         <small>On STARTRADER</small>
@@ -746,7 +743,7 @@ tbody tr.top3 { background: rgba(205,127,50,.05); }
 <div class="mobile-menu" id="mobile-menu">
   <div class="drawer">
     <div style="display:flex;justify-content:space-between;align-items:center">
-      <strong>FXULTI CUP</strong>
+      <span style="display:flex;align-items:center;gap:8px"><img class="brand-mark" src="logo-fx.png" alt=""><strong>FXULTI CUP</strong></span>
       <button class="menu-btn" id="menu-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <a href="#overview" data-i18n="nav_overview">Gambaran</a>
