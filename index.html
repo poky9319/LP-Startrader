@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>FXUlti Trader Cup · STARTRADER</title>
 <meta name="description" content="Monthly STARTRADER trader competition hosted by FXUlti. Ranked by ROI. Minimum deposit $50. Results updated daily at 08:00.">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" href="/favicon.ico?v=cyan" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=cyan">
+<link rel="icon" type="image/png" sizes="512x512" href="/favicon-512.png?v=cyan">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=cyan">
 <meta name="theme-color" content="#0a0b0d">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -304,30 +305,37 @@ section { padding: 72px 0; scroll-margin-top: 84px; }
   z-index: 2;
 }
 .stat-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 112px;
   background: var(--card);
   border: 1px solid var(--line);
   border-radius: 8px;
-  padding: 22px 20px;
+  padding: 20px 18px;
 }
 .stat-card small {
   display: block;
   color: var(--muted);
   font-size: 12px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  margin-bottom: 8px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  line-height: 1.3;
+  min-height: 16px;
+  margin-bottom: 10px;
 }
-.stat-card strong {
-  font-size: 28px;
-  letter-spacing: -.03em;
-  color: var(--cyan);
-}
+.stat-card strong,
 .countdown {
-  font-variant-numeric: tabular-nums;
-  letter-spacing: .08em;
-  font-size: 22px !important;
+  display: block;
+  font-size: 24px;
   font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+  color: var(--cyan);
+  font-variant-numeric: tabular-nums lining-nums;
+  white-space: nowrap;
 }
+.tnc-note { margin-top: 18px; font-size: 13px; line-height: 1.75; max-width: 920px; }
 
 .prizes { display: grid; grid-template-columns: 1fr 1.15fr 1fr; gap: 16px; align-items: stretch; }
 .prize {
@@ -619,17 +627,18 @@ tbody tr.top3 { background: rgba(205,127,50,.05); }
     gap: 10px;
     margin-top: 4px;
   }
-  .stat-card { padding: 14px 12px; }
+  .stat-card { min-height: 92px; padding: 14px 12px; }
   .stat-card small {
-    font-size: 10px;
-    margin-bottom: 6px;
-    letter-spacing: .04em;
+    font-size: 11px;
+    min-height: 14px;
+    margin-bottom: 8px;
+    letter-spacing: .02em;
     color: #c5c9ce;
     white-space: normal;
     line-height: 1.3;
   }
-  .stat-card strong { font-size: 22px; }
-  .countdown { font-size: 16px !important; letter-spacing: .04em; }
+  .stat-card strong,
+  .countdown { font-size: 20px; letter-spacing: -.02em; }
   section { padding: 36px 0; scroll-margin-top: 72px; }
   .section-head { margin-bottom: 18px; }
   .section-head h2 { font-size: 24px; }
@@ -713,7 +722,7 @@ tbody tr.top3 { background: rgba(205,127,50,.05); }
 <nav class="nav">
   <div class="wrap">
     <a class="brand" href="/">
-      <img class="brand-mark" src="logo-fx.png" alt="FXUlti">
+      <img class="brand-mark" src="logo-fx.png?v=depth" alt="FXUlti">
       <span class="brand-text">
         <strong>FXULTI CUP</strong>
         <small>On STARTRADER</small>
@@ -743,7 +752,7 @@ tbody tr.top3 { background: rgba(205,127,50,.05); }
 <div class="mobile-menu" id="mobile-menu">
   <div class="drawer">
     <div style="display:flex;justify-content:space-between;align-items:center">
-      <span style="display:flex;align-items:center;gap:8px"><img class="brand-mark" src="logo-fx.png" alt=""><strong>FXULTI CUP</strong></span>
+      <span style="display:flex;align-items:center;gap:8px"><img class="brand-mark" src="logo-fx.png?v=depth" alt=""><strong>FXULTI CUP</strong></span>
       <button class="menu-btn" id="menu-close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <a href="#overview" data-i18n="nav_overview">Gambaran</a>
@@ -781,8 +790,8 @@ tbody tr.top3 { background: rgba(205,127,50,.05); }
   <div class="stats">
     <div class="stat-card"><small data-i18n="stat_min">Minimum deposit</small><strong>$50</strong></div>
     <div class="stat-card"><small data-i18n="stat_metric">Ranking metric</small><strong>ROI</strong></div>
-    <div class="stat-card"><small data-i18n="stat_update">Daily update</small><strong>08:00</strong></div>
-    <div class="stat-card"><small data-i18n="stat_next">Kemas kini seterusnya</small><strong id="next-refresh" class="countdown">--:--:--</strong></div>
+    <div class="stat-card"><small data-i18n="stat_update">Ends</small><strong data-i18n="stat_end_val">1 Oct 04:00</strong></div>
+    <div class="stat-card"><small data-i18n="stat_next">Time left</small><strong id="next-refresh" class="countdown">--:--:--</strong></div>
   </div>
 </div>
 
@@ -895,22 +904,39 @@ tbody tr.top3 { background: rgba(205,127,50,.05); }
     </div>
     <div class="faq-grid">
       <article class="faq">
-        <h3 data-i18n="faq_who_t">Siapa boleh sertai?</h3>
-        <p data-i18n="faq_who_d">Sesiapa yang bekerjasama dengan FXUlti boleh menyertai. Untuk butiran, tanya khidmat pelanggan.</p>
+        <h3 data-i18n="faq_period_t">Competition period</h3>
+        <p data-i18n="faq_period_d">Starts 13 Sep 2026 00:00 and ends 1 Oct 2026 04:00 (Malaysia time). The official ranking is frozen at the end time.</p>
       </article>
       <article class="faq">
-        <h3 data-i18n="faq_name_t">Nama di papan</h3>
-        <p data-i18n="faq_name_d">Nama KYC dipaparkan dengan bahagian tengah ditutup ****, contoh AHMAD **** ISMAIL.</p>
+        <h3 data-i18n="faq_who_t">Who can join?</h3>
+        <p data-i18n="faq_who_d">Open or link a STARTRADER live account via FXUlti, deposit at least $50, then send your User ID, email and account details to customer service.</p>
       </article>
       <article class="faq">
-        <h3 data-i18n="faq_final_t">Bila keputusan dikira?</h3>
-        <p data-i18n="faq_final_d">Papan harian dikemas kini setiap 08:00. Keputusan rasmi bulan tersebut dikira pada 1 haribulan berikutnya.</p>
+        <h3 data-i18n="faq_roi_t">How is ranking calculated?</h3>
+        <p data-i18n="faq_roi_d">Ranked by ROI from the STARTRADER daily report. The public board updates every day at 08:00. The same method applies to every participant.</p>
       </article>
       <article class="faq">
-        <h3 data-i18n="faq_prize_t">Bila hadiah dihantar?</h3>
-        <p data-i18n="faq_prize_d">Hadiah pemenang akan dihantar dalam 7 hari bekerja.</p>
+        <h3 data-i18n="faq_name_t">Names on the board</h3>
+        <p data-i18n="faq_name_d">KYC names are shown with the middle hidden as ****, e.g. AHMAD **** ISMAIL. Legal ID names are not published in full.</p>
+      </article>
+      <article class="faq">
+        <h3 data-i18n="faq_final_t">When are official results counted?</h3>
+        <p data-i18n="faq_final_d">Daily board is for reference. Official results are counted at 1 Oct 2026 04:00 (Malaysia time). Prizes follow the official freeze, not the intraday board.</p>
+      </article>
+      <article class="faq">
+        <h3 data-i18n="faq_prize_t">When are prizes shipped?</h3>
+        <p data-i18n="faq_prize_d">Champion 500 USDT, runner-up 1g 999 gold bar, 3rd AirPods 4. Winners receive prizes within 7 working days after official results.</p>
+      </article>
+      <article class="faq">
+        <h3 data-i18n="faq_fair_t">Fair play</h3>
+        <p data-i18n="faq_fair_d">One live account per person. Hedging, multi-account abuse, or bonus-credit abuse may be disqualified. FXUlti's decision is final.</p>
+      </article>
+      <article class="faq">
+        <h3 data-i18n="faq_host_t">Who hosts this cup?</h3>
+        <p data-i18n="faq_host_d">This is an FXUlti IB competition traded on STARTRADER accounts. It is not an official STARTRADER corporate website.</p>
       </article>
     </div>
+    <p class="muted tnc-note" data-i18n="tnc_note">By joining, you accept these terms, the $50 minimum live deposit, ROI ranking, and the 13 Sep 2026 – 1 Oct 2026 04:00 schedule. Trading involves risk of loss.</p>
   </div>
 </section>
 
@@ -957,7 +983,7 @@ const COUNTRY_NAMES = {
 
 const I18N = {
   en: {
-    top_note: "FXUlti IB competition · results updated daily 08:00",
+    top_note: "FXUlti IB competition · 13 Sep 2026 – 1 Oct 2026 04:00",
     btn_open: "OPEN LIVE ACCOUNT",
     btn_open_m: "OPEN ACCOUNT",
     btn_open_full: "Open STARTRADER account",
@@ -969,15 +995,16 @@ const I18N = {
     nav_board: "Leaderboard",
     nav_rules: "Rules",
     hero_title: "Trade. Rank. Win.",
-    hero_sub: "A monthly live-account championship on STARTRADER. Ranked by ROI. Minimum deposit $50. The board refreshes every morning at 08:00.",
+    hero_sub: "A live-account championship on STARTRADER from 13 Sep 2026 to 1 Oct 2026 04:00. Ranked by ROI. Minimum deposit $50. Daily board at 08:00.",
     pill_min: "Min. deposit $50",
     pill_roi: "Ranked by ROI",
-    pill_update: "Daily update 08:00",
-    pill_month: "New season every month",
+    pill_update: "Daily board 08:00",
+    pill_month: "13 Sep – 1 Oct 04:00",
     stat_min: "Minimum deposit",
     stat_metric: "Ranking metric",
-    stat_update: "Daily update",
-    stat_next: "Next refresh",
+    stat_update: "Ends",
+    stat_end_val: "1 Oct 04:00",
+    stat_next: "Time left",
     prize_kicker: "PRIZE PODIUM",
     prize_title: "This month's podium",
     prize_1: "Champion",
@@ -994,7 +1021,7 @@ const I18N = {
     step3_t: "Submit registration details",
     step3_d: "Submit your User ID, email, and account information. Contact customer service to complete registration.",
     step4_t: "Trade and check ROI",
-    step4_d: "The board updates every day at 08:00. Official results are counted on the 1st of the following month.",
+    step4_d: "Trade on the live account. Daily board updates at 08:00. Official ranking freezes at 1 Oct 2026 04:00.",
     board_kicker: "LIVE BOARD",
     board_title: "ROI leaderboard",
     updated_label: "Last update",
@@ -1008,24 +1035,33 @@ const I18N = {
     empty_t: "Board opens with the first official update",
     empty_d: "Register now with your User ID, email, and account details. Rankings appear after the daily 08:00 update.",
     uid_note: "KYC names are shown with the middle hidden as ****, e.g. AHMAD **** ISMAIL.",
-    rules_kicker: "RULES & FAQ",
-    rules_title: "How ranking works",
+    rules_kicker: "RULES & T&C",
+    rules_title: "Terms and ranking",
+    faq_period_t: "Competition period",
+    faq_period_d: "Starts 13 Sep 2026 00:00 and ends 1 Oct 2026 04:00 (Malaysia time). The official ranking is frozen at the end time.",
     faq_who_t: "Who can join?",
-    faq_who_d: "Anyone who partners with FXUlti can join. For details, contact customer service.",
+    faq_who_d: "Open or link a STARTRADER live account via FXUlti, deposit at least $50, then send your User ID, email and account details to customer service.",
+    faq_roi_t: "How is ranking calculated?",
+    faq_roi_d: "Ranked by ROI from the STARTRADER daily report. The public board updates every day at 08:00. The same method applies to every participant.",
     faq_name_t: "Names on the board",
-    faq_name_d: "KYC names are shown with the middle hidden as ****, e.g. AHMAD **** ISMAIL.",
-    faq_final_t: "When are results counted?",
-    faq_final_d: "The daily board updates at 08:00. Official monthly results are counted on the 1st of the following month.",
+    faq_name_d: "KYC names are shown with the middle hidden as ****, e.g. AHMAD **** ISMAIL. Legal ID names are not published in full.",
+    faq_final_t: "When are official results counted?",
+    faq_final_d: "Daily board is for reference. Official results are counted at 1 Oct 2026 04:00 (Malaysia time). Prizes follow the official freeze, not the intraday board.",
     faq_prize_t: "When are prizes shipped?",
-    faq_prize_d: "Winners' prizes will be shipped within 7 working days.",
+    faq_prize_d: "Champion 500 USDT, runner-up 1g 999 gold bar, 3rd AirPods 4. Winners receive prizes within 7 working days after official results.",
+    faq_fair_t: "Fair play",
+    faq_fair_d: "One live account per person. Hedging, multi-account abuse, or bonus-credit abuse may be disqualified. FXUlti's decision is final.",
+    faq_host_t: "Who hosts this cup?",
+    faq_host_d: "This is an FXUlti IB competition traded on STARTRADER accounts. It is not an official STARTRADER corporate website.",
+    tnc_note: "By joining, you accept these terms, the $50 minimum live deposit, ROI ranking, and the 13 Sep 2026 – 1 Oct 2026 04:00 schedule. Trading involves risk of loss.",
+    disclaimer: "Risk warning: Leveraged trading in forex and CFDs involves substantial risk of loss and is not suitable for all investors. This page is an independent FXUlti IB promotion, not an official STARTRADER corporate site. Past ROI does not predict future results. FXUlti may amend rules, verify accounts, and disqualify irregular activity. Local advertising and financial-promotion rules may apply.",
     cta_kicker: "OPEN CHALLENGE",
     cta_title: "Are you Malaysia's next trading champion?",
     cta_sub: "Submit your User ID, email, and account information. Contact customer service to register.",
-    disclaimer: "Risk warning: Leveraged trading in forex and CFDs involves substantial risk of loss and is not suitable for all investors. This page is an FXUlti IB promotion. Past ROI does not predict future results. Local advertising and financial-promotion rules may apply in your country.",
     tg_msg: "Hi, I want to join the FXUlti STARTRADER Trader Cup.\nUser ID:\nEmail:\nAccount details:"
   },
   ms: {
-    top_note: "Pertandingan IB FXUlti · keputusan dikemas kini setiap hari 08:00",
+    top_note: "Pertandingan IB FXUlti · 13 Sep 2026 – 1 Oct 2026 04:00",
     btn_open: "BUKA AKAUN LANGSUNG",
     btn_open_m: "BUKA AKAUN",
     btn_open_full: "Buka akaun STARTRADER",
@@ -1037,15 +1073,16 @@ const I18N = {
     nav_board: "Papan Pendahulu",
     nav_rules: "Peraturan",
     hero_title: "Berdagang. Berprestasi. Menang.",
-    hero_sub: "Kejohanan akaun live bulanan di STARTRADER. Kedudukan mengikut ROI. Deposit minimum $50. Papan dikemas kini setiap pagi pada 08:00.",
+    hero_sub: "Kejohanan akaun live STARTRADER dari 13 Sep 2026 hingga 1 Oct 2026 04:00. Kedudukan mengikut ROI. Deposit minimum $50. Papan harian pada 08:00.",
     pill_min: "Deposit min. $50",
     pill_roi: "Kedudukan mengikut ROI",
     pill_update: "Kemas kini harian 08:00",
-    pill_month: "Musim baharu setiap bulan",
+    pill_month: "13 Sep – 1 Oct 04:00",
     stat_min: "Deposit min.",
     stat_metric: "Metrik",
-    stat_update: "Harian",
-    stat_next: "Seterusnya",
+    stat_update: "Tamat",
+    stat_end_val: "1 Oct 04:00",
+    stat_next: "Masa berbaki",
     prize_kicker: "PODIUM HADIAH",
     prize_title: "Podium bulan ini",
     prize_1: "Juara",
@@ -1062,7 +1099,7 @@ const I18N = {
     step3_t: "Hantar maklumat pendaftaran",
     step3_d: "Hantar User ID, e-mel dan maklumat akaun anda. Hubungi khidmat pelanggan untuk mendaftar.",
     step4_t: "Berdagang dan semak ROI",
-    step4_d: "Papan dikemas kini setiap hari 08:00. Keputusan rasmi dikira pada 1 haribulan berikutnya.",
+    step4_d: "Berdagang pada akaun live. Papan harian dikemas kini 08:00. Kedudukan rasmi dibekukan pada 1 Oct 2026 04:00.",
     board_kicker: "PAPAN LANGSUNG",
     board_title: "Papan pendahulu ROI",
     updated_label: "Kemas kini terakhir",
@@ -1076,24 +1113,33 @@ const I18N = {
     empty_t: "Papan dibuka dengan kemas kini rasmi pertama",
     empty_d: "Daftar sekarang dengan User ID, e-mel dan maklumat akaun. Kedudukan muncul selepas kemas kini 08:00.",
     uid_note: "Nama KYC dipaparkan dengan bahagian tengah ditutup ****, contoh AHMAD **** ISMAIL.",
-    rules_kicker: "PERATURAN & SOALAN",
-    rules_title: "Bagaimana kedudukan dikira",
+    rules_kicker: "PERATURAN & T&C",
+    rules_title: "Terma dan kedudukan",
+    faq_period_t: "Tempoh pertandingan",
+    faq_period_d: "Mula 13 Sep 2026 00:00 dan tamat 1 Oct 2026 04:00 (waktu Malaysia). Kedudukan rasmi dibekukan pada masa tamat.",
     faq_who_t: "Siapa boleh sertai?",
-    faq_who_d: "Sesiapa yang bekerjasama dengan FXUlti boleh menyertai. Untuk butiran, tanya khidmat pelanggan.",
+    faq_who_d: "Buka atau pautkan akaun live STARTRADER melalui FXUlti, deposit sekurang-kurangnya $50, kemudian hantar User ID, e-mel dan maklumat akaun kepada khidmat pelanggan.",
+    faq_roi_t: "Bagaimana kedudukan dikira?",
+    faq_roi_d: "Kedudukan mengikut ROI dari laporan harian STARTRADER. Papan awam dikemas kini setiap hari 08:00. Kaedah yang sama untuk semua peserta.",
     faq_name_t: "Nama di papan",
-    faq_name_d: "Nama KYC dipaparkan dengan bahagian tengah ditutup ****, contoh AHMAD **** ISMAIL.",
-    faq_final_t: "Bila keputusan dikira?",
-    faq_final_d: "Papan harian dikemas kini setiap 08:00. Keputusan rasmi bulan tersebut dikira pada 1 haribulan berikutnya.",
+    faq_name_d: "Nama KYC dipaparkan dengan bahagian tengah ditutup ****, contoh AHMAD **** ISMAIL. Nama sah penuh tidak disiarkan.",
+    faq_final_t: "Bila keputusan rasmi dikira?",
+    faq_final_d: "Papan harian adalah rujukan. Keputusan rasmi dikira pada 1 Oct 2026 04:00 (waktu Malaysia). Hadiah ikut pembekuan rasmi, bukan papan semasa hari.",
     faq_prize_t: "Bila hadiah dihantar?",
-    faq_prize_d: "Hadiah pemenang akan dihantar dalam 7 hari bekerja.",
+    faq_prize_d: "Juara 500 USDT, naib juara gold bar 1g 999, tempat ke-3 AirPods 4. Hadiah dihantar dalam 7 hari bekerja selepas keputusan rasmi.",
+    faq_fair_t: "Permainan adil",
+    faq_fair_d: "Satu akaun live setiap orang. Hedging, penyalahgunaan berbilang akaun, atau penyalahgunaan kredit bonus boleh diskualifikasi. Keputusan FXUlti adalah muktamad.",
+    faq_host_t: "Siapa anjur piala ini?",
+    faq_host_d: "Ini pertandingan IB FXUlti pada akaun STARTRADER. Ia bukan laman korporat rasmi STARTRADER.",
+    tnc_note: "Dengan menyertai, anda menerima terma ini, deposit live minimum $50, kedudukan ROI, dan jadual 13 Sep 2026 – 1 Oct 2026 04:00. Dagangan melibatkan risiko kerugian.",
     cta_kicker: "CABARAN TERBUKA",
     cta_title: "Adakah Anda Juara Dagangan Malaysia yang Seterusnya?",
     cta_sub: "Hantar User ID, e-mel dan maklumat akaun. Hubungi khidmat pelanggan untuk mendaftar.",
-    disclaimer: "Amaran risiko: Dagangan berleveraj forex dan CFD melibatkan risiko kerugian yang besar dan tidak sesuai untuk semua pelabur. Laman ini ialah promosi IB FXUlti. ROI lepas tidak meramal hasil masa depan. Peraturan pengiklanan kewangan tempatan mungkin terpakai.",
+    disclaimer: "Amaran risiko: Dagangan berleveraj forex dan CFD melibatkan risiko kerugian yang besar dan tidak sesuai untuk semua pelabur. Laman ini ialah promosi IB FXUlti yang bebas, bukan laman korporat rasmi STARTRADER. ROI lepas tidak meramal hasil masa depan. FXUlti boleh pinda peraturan, sahkan akaun, dan diskualifikasi aktiviti tidak teratur. Peraturan pengiklanan kewangan tempatan mungkin terpakai.",
     tg_msg: "Hi, saya mahu sertai FXUlti STARTRADER Trader Cup.\nUser ID:\nE-mel:\nMaklumat akaun:"
   },
   "zh-CN": {
-    top_note: "FXUlti IB 交易员比赛 · 成绩每天 08:00 更新",
+    top_note: "FXUlti IB 交易员比赛 · 2026年9月13日 – 2026年10月1日 04:00",
     btn_open: "立即开户",
     btn_open_m: "立即开户",
     btn_open_full: "开通 STARTRADER 账户",
@@ -1105,15 +1151,16 @@ const I18N = {
     nav_board: "成绩榜",
     nav_rules: "规则",
     hero_title: "交易. 排名. 夺冠.",
-    hero_sub: "每月一场 STARTRADER 真实账户锦标赛。按 ROI 排名，最低入金 $50，每天早上 08:00 更新榜单。",
+    hero_sub: "STARTRADER 真实账户锦标赛，2026年9月13日至10月1日 04:00。按 ROI 排名，最低入金 $50，日榜每天 08:00 更新。",
     pill_min: "最低入金 $50",
     pill_roi: "按 ROI 排名",
     pill_update: "每天 08:00 更新",
-    pill_month: "每月一届",
+    pill_month: "9月13日 – 10月1日 04:00",
     stat_min: "最低入金",
     stat_metric: "排名方式",
-    stat_update: "每日更新",
-    stat_next: "下次刷新",
+    stat_update: "结束时间",
+    stat_end_val: "10月1日 04:00",
+    stat_next: "距离结束",
     prize_kicker: "奖台",
     prize_title: "本月领奖台",
     prize_1: "冠军",
@@ -1130,7 +1177,7 @@ const I18N = {
     step3_t: "提交报名资料",
     step3_d: "提交 User ID、邮箱及账号信息，联系客服即可完成报名。",
     step4_t: "交易并查看 ROI",
-    step4_d: "榜单每天 08:00 更新。正式成绩在次月 1 日统计。",
+    step4_d: "在真实账户交易。日榜每天 08:00 更新。正式排名于 2026年10月1日 04:00 冻结。",
     board_kicker: "实时榜单",
     board_title: "ROI 成绩榜",
     updated_label: "最近更新",
@@ -1144,20 +1191,29 @@ const I18N = {
     empty_t: "首份官方数据到达后开榜",
     empty_d: "现在提交 User ID、邮箱及账号信息即可报名。每天 08:00 更新后会出现排名。",
     uid_note: "KYC 姓名中间用 **** 遮住，例如 AHMAD **** ISMAIL。",
-    rules_kicker: "规则与问答",
-    rules_title: "排名怎么算",
+    rules_kicker: "规则与条款",
+    rules_title: "参赛条款与排名",
+    faq_period_t: "比赛时间",
+    faq_period_d: "2026年9月13日 00:00 开赛，2026年10月1日 04:00 结束（马来西亚时间）。正式排名在结束时刻冻结。",
     faq_who_t: "谁可以参加？",
-    faq_who_d: "任何与 FXUlti 合作的人都可以参加。详情请询问客服。",
+    faq_who_d: "通过 FXUlti 开通或绑定 STARTRADER 真实账户，入金至少 $50，并把 User ID、邮箱和账号信息发给客服。",
+    faq_roi_t: "排名怎么算？",
+    faq_roi_d: "按 STARTRADER 每日报告中的 ROI 排名。公开榜单每天 08:00 更新。所有参赛者使用同一口径。",
     faq_name_t: "榜上的名字",
-    faq_name_d: "KYC 姓名中间用 **** 遮住，例如 AHMAD **** ISMAIL。",
-    faq_final_t: "成绩什么时候统计？",
-    faq_final_d: "日榜每天 08:00 更新。当月正式成绩在次月 1 日统计。",
+    faq_name_d: "KYC 姓名中间用 **** 遮住，例如 AHMAD **** ISMAIL。不会完整公布证件姓名。",
+    faq_final_t: "正式成绩什么时候统计？",
+    faq_final_d: "日榜仅供参考。正式成绩以 2026年10月1日 04:00（马来西亚时间）冻结为准。奖品按正式冻结结果发放，不以盘中榜单为准。",
     faq_prize_t: "奖品什么时候发货？",
-    faq_prize_d: "得奖者的奖品将在 7 个工作日内发货。",
+    faq_prize_d: "冠军 500 USDT，亚军 1克 999 金条，季军 AirPods 4。正式成绩公布后 7 个工作日内发货。",
+    faq_fair_t: "公平竞赛",
+    faq_fair_d: "每人限一个真实账户。对锁、多账户滥用或赠金/信用金套利可能被取消资格。FXUlti 的判定为最终决定。",
+    faq_host_t: "谁主办这场比赛？",
+    faq_host_d: "这是 FXUlti 作为 IB 举办的比赛，交易发生在 STARTRADER 账户上。不是 STARTRADER 官方企业网站。",
+    tnc_note: "报名即表示你接受以上条款、最低入金 $50、按 ROI 排名，以及 2026年9月13日 – 10月1日 04:00 的赛程。交易存在亏损风险。",
     cta_kicker: "公开挑战",
     cta_title: "你是否是下一位全马交易冠军？",
     cta_sub: "提交 User ID、邮箱及账号信息，联系客服即可报名。",
-    disclaimer: "风险提示：外汇与差价合约杠杆交易存在重大亏损风险，并不适合所有投资者。本页是 FXUlti IB 推广活动。过往 ROI 不代表未来表现。你所在地区可能适用金融广告与推广监管规定。",
+    disclaimer: "风险提示：外汇与差价合约杠杆交易存在重大亏损风险，并不适合所有投资者。本页是 FXUlti IB 独立推广活动，不是 STARTRADER 官方企业网站。过往 ROI 不代表未来表现。FXUlti 可修订规则、核验账户，并取消异常交易资格。你所在地区可能适用金融广告与推广监管规定。",
     tg_msg: "你好，我想参加 FXUlti STARTRADER 交易员比赛。\nUser ID：\n邮箱：\n账号信息："
   }
 };
@@ -1215,8 +1271,10 @@ function applyI18n() {
     else hero.textContent = raw;
   }
   if (DATA) {
-    const mk = DATA.monthShort && (DATA.monthShort[LANG] || DATA.monthShort.en);
-    document.getElementById("hero-kicker").textContent = (mk || DATA.month || "") + " · " + (LANG === "zh-CN" ? "每月杯赛" : LANG === "ms" ? "Piala Bulanan" : "MONTHLY CUP");
+    document.getElementById("hero-kicker").textContent =
+      LANG === "zh-CN" ? "9月13日 – 10月1日 04:00 · 杯赛" :
+      LANG === "ms" ? "13 SEP – 1 OCT 04:00 · PIALA" :
+      "13 SEP – 1 OCT 04:00 · CUP";
   }
   setTelegramLinks();
 }
@@ -1299,27 +1357,27 @@ function renderBoard(filter) {
   });
 }
 
-function nextRefreshMs() {
-  const hour = (DATA && DATA.updateHour) || 8;
-  const now = new Date(new Date().toLocaleString("en-US", { timeZone: "Asia/Kuala_Lumpur" }));
-  const next = new Date(now);
-  next.setHours(hour, 0, 0, 0);
-  if (now >= next) next.setDate(next.getDate() + 1);
-  return Math.max(0, next.getTime() - now.getTime());
+function endCountdownMs() {
+  const raw = (DATA && (DATA.endAt || DATA.endDate)) || "2026-10-01T04:00:00+08:00";
+  const iso = /T/.test(String(raw)) ? raw : String(raw) + "T04:00:00+08:00";
+  return new Date(iso).getTime() - Date.now();
 }
 
 function formatCountdown(ms) {
+  if (ms <= 0) return "00:00:00";
   const total = Math.floor(ms / 1000);
-  const h = Math.floor(total / 3600);
+  const d = Math.floor(total / 86400);
+  const h = Math.floor((total % 86400) / 3600);
   const m = Math.floor((total % 3600) / 60);
   const s = total % 60;
   const pad = (n) => String(n).padStart(2, "0");
+  if (d > 0) return d + "d " + pad(h) + ":" + pad(m) + ":" + pad(s);
   return pad(h) + ":" + pad(m) + ":" + pad(s);
 }
 
 function tickCountdown() {
   const el = document.getElementById("next-refresh");
-  if (el) el.textContent = formatCountdown(nextRefreshMs());
+  if (el) el.textContent = formatCountdown(endCountdownMs());
 }
 
 function hydrate() {
